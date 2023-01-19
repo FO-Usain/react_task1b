@@ -1,62 +1,62 @@
-import React, { useReducer } from "react";
-import MkdSDK from "../utils/MkdSDK";
-import { loggedOut } from "./actions/actionCreators/Auth";
+// import React, { useReducer } from "react";
+// import MkdSDK from "../utils/MkdSDK";
+// import { loggedOut } from "./actions/actionCreators/Auth";
 
-export const AuthContext = React.createContext();
+// export const AuthContext = React.createContext();
 
-const initialState = {
-  isAuthenticated: false,
-  user: null,
-  token: null,
-  role: null,
-};
+// const initialState = {
+//   isAuthenticated: false,
+//   user: null,
+//   token: null,
+//   role: null,
+// };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "LOGIN":
-      //TODO
-      return {
-        ...state,
-      };
-    case "LOGOUT":
-      localStorage.clear();
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
-    default:
-      return state;
-  }
-};
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "LOGIN":
+//       //TODO
+//       return {
+//         ...state,
+//       };
+//     case "LOGOUT":
+//       localStorage.clear();
+//       return {
+//         ...state,
+//         isAuthenticated: false,
+//         user: null,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
-let sdk = new MkdSDK();
+// let sdk = new MkdSDK();
 
-export const tokenExpireError = (dispatch, errorMessage) => {
-  const role = localStorage.getItem("role");
-  if (errorMessage === "TOKEN_EXPIRED") {
-    dispatch(loggedOut());
-    window.location.href = "/" + role + "/login";
-  }
-};
+// export const tokenExpireError = (dispatch, errorMessage) => {
+//   const role = localStorage.getItem("role");
+//   if (errorMessage === "TOKEN_EXPIRED") {
+//     dispatch(loggedOut());
+//     window.location.href = "/" + role + "/login";
+//   }
+// };
 
-const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+// const AuthProvider = ({ children }) => {
+//   const [state, dispatch] = useReducer(reducer, initialState);
 
-  React.useEffect(() => {
-    //TODO
-  }, []);
+//   React.useEffect(() => {
+//     //TODO
+//   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
+//   return (
+//     <AuthContext.Provider
+//       value={{
+//         state,
+//         dispatch,
+//       }}
+//     >
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
 
-export default AuthProvider;
+// export default AuthProvider;
