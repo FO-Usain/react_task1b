@@ -1,0 +1,13 @@
+.videosNav {
+    display: flex;
+}
+
+.videosNav > * {
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+}
+
+.videosNav > * + * {
+    margin-left: 1rem;
+}

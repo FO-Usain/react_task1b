@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import LeadBoard from "../components/LeadBoard/LeadBoard";
 import Logout from "../components/Logout/Logout";
+import Videos from "../components/Videos/Videos";
 import "../pagesStyles/AdminDashboard.css";
 import { AuthContext } from "../stateManagement/contexts/AuthContext";
 
@@ -33,6 +34,7 @@ const AdminDashboardPage = () => {
           <Logout />
         </div>
         <LeadBoard />
+        <Videos />
       </div>
     </>
   );
