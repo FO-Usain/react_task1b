@@ -1,8 +1,9 @@
+
 export default function MkdSDK() {
   this._baseurl = "https://reacttask.mkdlabs.com";
   this._project_id = "reacttask";
   this._secret = "d9hedycyv6p7zw8xi34t9bmtsjsigy5t7";
-  this._table = "";
+  this._table = "video";
   this._custom = "";
   this._method = "";
 
@@ -12,9 +13,17 @@ export default function MkdSDK() {
   this.setTable = function (table) {
     this._table = table;
   };
-  
+
   this.login = async function (email, password, role) {
     //TODO
+    const response = await this.callRestAPI({
+      email,
+      password,
+      role
+    }, "POST", "login");
+
+    return response;
+
   };
 
   this.getHeader = function () {
@@ -27,8 +36,8 @@ export default function MkdSDK() {
   this.baseUrl = function () {
     return this._baseurl;
   };
-  
-  this.callRestAPI = async function (payload, method) {
+
+  this.callRestAPI = async function (payload, method, page = "") {
     const header = {
       "Content-Type": "application/json",
       "x-project": base64Encode,
@@ -55,7 +64,25 @@ export default function MkdSDK() {
           throw new Error(jsonGet.message);
         }
         return jsonGet;
-      
+
+      case "POST":
+        const postResult = await fetch(
+          this._baseurl + `/v2/api/lambda/${page}`,
+          {
+            method: "post",
+            headers: header,
+            body: JSON.stringify(payload),
+          }
+        );
+
+        const jsonPost = await postResult.json();
+
+        if (postResult.status >= 400 && postResult.status <= 499) {
+          throw new Error(jsonPost.message);
+        }
+
+        return jsonPost;
+
       case "PAGINATE":
         if (!payload.page) {
           payload.page = 1;
@@ -84,11 +111,24 @@ export default function MkdSDK() {
       default:
         break;
     }
-  };  
+  };
 
   this.check = async function (role) {
     //TODO
+    const response = await this.callRestAPI({ role }, "POST", "check");
+
+    return response;
   };
+
+  this.getVideoPage = async function (page) {
+    const jsonPaginate = await this.callRestAPI({
+      payload: {},
+      page: page,
+      limit: 10
+    }, "PAGINATE");
+
+    return jsonPaginate;
+  }
 
   return this;
 }

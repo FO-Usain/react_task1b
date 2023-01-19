@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
-import MkdSDK from "./utils/MkdSDK";
+import MkdSDK from "../utils/MkdSDK";
+import { loggedOut } from "./actions/actionCreators/Auth";
 
 export const AuthContext = React.createContext();
 
@@ -34,9 +35,7 @@ let sdk = new MkdSDK();
 export const tokenExpireError = (dispatch, errorMessage) => {
   const role = localStorage.getItem("role");
   if (errorMessage === "TOKEN_EXPIRED") {
-    dispatch({
-      type: "Logout",
-    });
+    dispatch(loggedOut());
     window.location.href = "/" + role + "/login";
   }
 };

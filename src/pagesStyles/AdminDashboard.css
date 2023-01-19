@@ -1,0 +1,36 @@
+.dashboardContainer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-sizing: content-box;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 4rem;
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    background-color: #111111;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+.dashboardContainer > * {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashBoardHeader {
+    display: flex;
+    width: 100%;
+}
+
+.pageTitle {
+    margin-left: 0;
+    margin-right: auto;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.25rem;
+    color: white;
+}
